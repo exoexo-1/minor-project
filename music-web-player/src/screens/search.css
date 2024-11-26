@@ -1,0 +1,177 @@
+/* General container for the search page */
+.search-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+/* Search section containing the bar and results */
+.search-section {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Search bar styling */
+.search-bar-container {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  outline: none;
+  font-size: 16px;
+}
+
+.search-button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #45a049;
+}
+
+/* Results container and individual items */
+.search-results {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: rgb(13, 162, 162);
+}
+
+.result-item {
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.result-item p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.result-item audio {
+  width: 100%;
+  border-radius: 5px;
+}
+
+/* Feed section below the search bar */
+.search-feed {
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 15px;
+}
+
+/* Add a gradient background to the page */
+.all-songs-section {
+  margin-top: 20px;
+}
+
+.all-songs-scrollable {
+  max-height: 400px; /* Set the height of the scrollable area */
+  overflow-y: auto; /* Enable vertical scrolling */
+  border: 1px solid #ccc; /* Optional: Add a border to distinguish the area */
+  padding: 10px;
+  background-color: #f9f9f9; /* Optional: Set a background color */
+  border-radius: 5px; /* Optional: Round the corners */
+}
+
+.song-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0; /* Optional: Add a divider between songs */
+  display: flex; /* To align items horizontally */
+  justify-content: space-between;
+  align-items: center;
+}
+
+.song-details {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Allow details to take remaining space */
+}
+
+.song-details p {
+  margin: 0;
+}
+
+/* Action buttons on the right */
+.song-actions {
+  display: flex;
+  
+  gap: 10px;
+}
+
+.song-actions button {
+  position: relative;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.song-actions button:hover .hover-text {
+  display: block;
+}
+
+.hover-text {
+  display: none;
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 5px 8px;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.play-button .fa-play {
+  color: #3e7a20; /* Green play button */
+}
+
+.favorite-button .fa-heart {
+  color: #ec2929; /*Red favorite heart */
+
+}
+
+/* Scrollable container for search results */
+.search-results-scrollable {
+  max-height: 400px; /* Limit height */
+  width: 550px;
+  overflow-y: auto; /* Enable scrolling */
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}

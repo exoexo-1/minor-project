@@ -1,0 +1,39 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #181818;
+  color: white;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #282828;
+}
+
+.header a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+}
+
+.content {
+  margin: 20px;
+}
+
+.playlist {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.player {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: #282828;
+  text-align: center;
+}

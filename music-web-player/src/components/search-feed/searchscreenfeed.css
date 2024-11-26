@@ -1,0 +1,36 @@
+.playlists-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #E8F5E9; 
+    border-radius: 10px;
+  }
+  
+  .playlist {
+    background-color: #D1C4E9; 
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .song-list {
+    margin-top: 10px;
+  }
+  
+  .song-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 8px 0;
+  }
+  
+  .song-item p {
+    margin: 0;
+  }
+  
+  audio {
+    width: 100%;
+    max-width: 150px;
+    margin-left: 10px;
+  }
+  

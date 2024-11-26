@@ -1,0 +1,55 @@
+.audio-player {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 800px;
+    background-color: rgba(0, 0, 0, 0.6); /* Transparent background */
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    color: white;
+  }
+  
+  .controls {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .control-icon {
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .track-info {
+    text-align: center;
+    flex-grow: 1;
+  }
+  
+  .song-title, .artist-name {
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  .song-title {
+    font-weight: bold;
+  }
+  
+  .timer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .current-time, .total-time {
+    font-size: 12px;
+  }
+  
+  .progress-bar {
+    width: 100px;
+  }
+  
