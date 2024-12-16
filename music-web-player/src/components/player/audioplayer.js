@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import './audioplayer.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -9,61 +8,81 @@ function AudioPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [audio, setAudio] = useState(null); 
-  const navigate = useNavigate();
+  const [audio, setAudio] = useState(null);
 
-  // Fetch random song when no song is selected
   useEffect(() => {
-    if (!currentSong) {
+    // Check if there's a saved song in localStorage when the component mounts
+    const savedSong = localStorage.getItem('currentSong');
+    if (savedSong) {
+      setCurrentSong(JSON.parse(savedSong));  // Parse the song data from localStorage
+    } else {
+      // If no song is saved, fetch a random one initially
       axios
         .get('http://localhost:8080/api/songs/all')
         .then((response) => {
           const randomSong = response.data[Math.floor(Math.random() * response.data.length)];
           setCurrentSong(randomSong);
-          playSong(randomSong);
         })
         .catch((error) => console.error('Error fetching songs:', error));
     }
-  }, [currentSong]);
+  }, []);  // This only runs once on mount
 
-  // Handle song play/pause
-  const handlePlayPause = () => {
-    if (!audio) {
-      return;
+  useEffect(() => {
+    if (currentSong) {
+      // Whenever currentSong changes, store it in localStorage
+      localStorage.setItem('currentSong', JSON.stringify(currentSong));
+      playSong(currentSong);  // Play the song after it's set
     }
+  }, [currentSong]);  // This runs whenever currentSong changes
+
+  const playSong = (song) => {
+    // Pause and reset any current song
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+
+    const fileName = song.filePath.replace("C:/minor1/music files mp3/", '').replace(/\\/g, '/').replace(/ /g, '%20');
+    const songUrl = `http://localhost:8080/songs/${fileName}`;
+
+    const newAudio = new Audio(songUrl);
+    newAudio.onloadedmetadata = () => {
+      setDuration(newAudio.duration);
+      newAudio.play().catch((error) => {
+        console.error('Error playing the audio:', error);
+      });
+      setIsPlaying(true);
+    };
+
+    newAudio.onerror = () => {
+      console.error('Audio load error: Cannot play the file', songUrl);
+    };
+
+    newAudio.ontimeupdate = () => {
+      setCurrentTime(newAudio.currentTime);
+    };
+
+    newAudio.onended = () => {
+      handleNextSong();
+    };
+
+    setAudio(newAudio);
+  };
+
+  const handlePlayPause = () => {
+    if (!audio) return;
+
     if (isPlaying) {
       audio.pause();
       setIsPlaying(false);
     } else {
       audio.play().catch((error) => {
-        console.error("Error playing the audio:", error);
+        console.error('Error playing the audio:', error);
       });
       setIsPlaying(true);
     }
   };
 
-  // Play song from URL
-  const playSong = (song) => {
-    if (audio) {
-      audio.pause();  // Pause the current audio if any
-    }
-  
-    // Ensure the file path uses forward slashes for URLs
-    const songPath = song.filePath.replace(/\\/g, '/'); // Adjust path for URL format
-  
-    // Make sure the path is relative to the static folder served by Spring Boot
-    const newAudio = new Audio(`http://localhost:8080/${songPath}`);
-    setAudio(newAudio);  // Set the new audio object
-    setDuration(newAudio.duration);
-    setIsPlaying(true);
-  
-    newAudio.ontimeupdate = () => {
-      setCurrentTime(newAudio.currentTime);
-    };
-  };
-  
-
-  // Fetch next song
   const handleNextSong = () => {
     if (currentSong) {
       axios
@@ -71,13 +90,11 @@ function AudioPlayer() {
         .then((response) => {
           const nextSong = response.data;
           setCurrentSong(nextSong);
-          playSong(nextSong);
         })
         .catch((error) => console.error('Error fetching next song:', error));
     }
   };
 
-  // Fetch previous song
   const handlePreviousSong = () => {
     if (currentSong) {
       axios
@@ -85,24 +102,17 @@ function AudioPlayer() {
         .then((response) => {
           const previousSong = response.data;
           setCurrentSong(previousSong);
-          playSong(previousSong);
         })
         .catch((error) => console.error('Error fetching previous song:', error));
     }
   };
 
-  // Handle song progress change
   const handleProgressChange = (e) => {
     const newTime = e.target.value;
-    audio.currentTime = newTime;
-    setCurrentTime(newTime);
-  };
-
-  // Navigate to library after clicking play from search
-  const handleSearchPlay = (song) => {
-    setCurrentSong(song);
-    playSong(song);
-    navigate('/library');
+    if (audio) {
+      audio.currentTime = newTime;
+      setCurrentTime(newTime);
+    }
   };
 
   return (

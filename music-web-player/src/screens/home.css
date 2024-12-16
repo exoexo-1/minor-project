@@ -1,10 +1,10 @@
 .main-body{
     height: 100vh;
     width:100vw ;
-    background-color: #dfc6f0;
+    
     border-radius: 30px;
     display: flex;
-    background-color: #c7add8;
+    background-color: #043f54;
     opacity: 1;
-    background-image:  repeating-radial-gradient( circle at left center, transparent 0, #cea0ed 40px ), repeating-linear-gradient( #39b8b855, #0a6161 );   
+      
 }

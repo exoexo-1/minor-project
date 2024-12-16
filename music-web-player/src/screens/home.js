@@ -12,6 +12,7 @@ function Home() {
   return (
       <Router>
         <div className="main-body">
+          
         <Sidebar />
             <Routes>
                 <Route path='/library' element={<Library />} />
