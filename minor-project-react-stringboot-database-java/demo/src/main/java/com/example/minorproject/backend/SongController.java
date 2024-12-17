@@ -103,6 +103,8 @@ public class SongController {
         }
     }
 
+
+
     // SearchHistory class to store query and its results
     public static class SearchHistory {
         private String query;
