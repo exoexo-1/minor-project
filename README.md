@@ -116,8 +116,12 @@ Located in the `minor-project-react-stringboot-database-java/demo/src/main/java/
 
 ## **Screenshots**
 
-### Home Screen
-Displays the audio player and album cover.
+
+
+
+https://github.com/user-attachments/assets/f16d338f-360a-4ec9-b9e4-c1ee10d805e1
+
+
 
 ### Search Screen
 Search for songs, view recent searches, and play songs directly.
